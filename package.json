@@ -1,0 +1,23 @@
+{
+  "name": "link-api-test",
+  "version": "1.0.0",
+  "description": "This repo is a integration between pipedrive and bling",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest \"^.+test\\.ts$\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AllanPazRibeiro/link-api-test.git"
+  },
+  "keywords": [
+    "pipedrive",
+    "bling"
+  ],
+  "author": "Allan Paz Ribeiro",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AllanPazRibeiro/link-api-test/issues"
+  },
+  "homepage": "https://github.com/AllanPazRibeiro/link-api-test#readme"
+}
