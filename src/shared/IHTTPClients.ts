@@ -3,7 +3,7 @@ import {
   CancelToken,
   CancelTokenSource,
 } from 'axios'
-import { HTTPClient } from './HTTPClient';
+import { HTTPClient } from './HTTPClient'
 
 export interface IHeaders {
   [key: string]: string | undefined

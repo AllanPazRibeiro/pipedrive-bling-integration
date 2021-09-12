@@ -1,4 +1,4 @@
-import IDatabase from "@presentation/http/server/interface/IDataBase";
+import IDatabase from "@presentation/http/server/interface/IDataBase"
 
 interface IServer {
   use(...args: any[]): void

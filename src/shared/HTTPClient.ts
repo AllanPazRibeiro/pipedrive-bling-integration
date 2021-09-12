@@ -116,6 +116,7 @@ export class HTTPClient implements IHTTPClient {
   }
 
   private handleError(error: AxiosError): Promise<AxiosError> {
+    console.log('error', error)
     return Promise.reject(new HTTPClientError(error))
   }
 

@@ -3,4 +3,8 @@ export const tokens = {
   Routes: Symbol('Routes'),
   App: Symbol('App'),
   MongoDBClient: Symbol('MongoDBClient'),
+  MakeDealController: Symbol('MakeDealController'),
+  Pipedrive: Symbol('Pipedrive'),
+  Bling: Symbol('Bling'),
+  MakeDeal: Symbol('MakeDeal'),
 }

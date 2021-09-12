@@ -1,8 +1,9 @@
 import { autoInjectable } from 'tsyringe'
-
 import { HTTPClient } from '../../shared/HTTPClient'
 import { Config } from '@config/Config'
-import { IOrder, IOrderResponse, IProduct, IProductResponse } from './interfaces/IBling'
+import { IProduct, IProductResponse } from './interfaces/IBling'
+import converter from 'xml-js';
+
 
 @autoInjectable()
 export class Bling {
@@ -15,10 +16,10 @@ export class Bling {
   }
 
   public async postProduct(product: IProduct): Promise<IProductResponse> {
-    return this.client.post(`/v2/produto/json/&apikey=${this.token}`, product)
-  }
 
-  public async postOrder(order: IOrder): Promise<IOrderResponse> {
-    return this.client.post(`/v2/pedido/json/&apikey=${this.token}`, order)
-  }  
+    return this.client.post(
+      `/v2/produto/json/&apikey=${this.token}`,
+      converter.js2xml(product)
+    )
+  }
 }

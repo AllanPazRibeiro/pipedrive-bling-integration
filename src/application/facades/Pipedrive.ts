@@ -2,7 +2,7 @@ import { autoInjectable } from 'tsyringe'
 
 import { HTTPClient } from '../../shared/HTTPClient'
 import { Config } from '@config/Config'
-import { IDeal } from './interfaces/IPipedrive'
+import { IDeal, IProducts } from './interfaces/IPipedrive'
 
 @autoInjectable()
 export class Pipedrive {
@@ -15,6 +15,10 @@ export class Pipedrive {
   }
 
   public async getDeals(): Promise<IDeal> {
-    return this.client.get(`deals?api_token=${this.token}`)
+    return this.client.get(`deals?api_token=${this.token}&status=won`)
+  }
+
+  public async getDealsProductsBy(id: number): Promise<IProducts> {
+    return this.client.get(`deals/${id}/products?api_token=${this.token}`)
   }
 }

@@ -43,7 +43,7 @@ export interface IOrg {
     value: number
 }
 
-export interface IData {
+export interface IDealData {
     id: number
     creator_IUser_id: ICreatorIUserId
     IUser_id: IUserId
@@ -112,21 +112,6 @@ export interface Pagination {
     more_items_in_collection: boolean
 }
 
-export interface AdditionalData {
-    pagination: Pagination
-}
-
-export interface IUser {
-    [key: string]: {
-        id: number
-        name: string
-        email: string
-        has_pic: number
-        pic_hash?: string
-        active_flag: boolean
-    }
-}
-
 export interface IOrgId {
     id: number
     name: string
@@ -159,15 +144,124 @@ export interface IPerson {
 
 export interface IRelatedObjects {
     IUser: IUser
-    organization: Organization
-    person: IPerson
+    organization?: Organization
+    person?: IPerson
 }
 
 export interface IDeal {
     success: boolean
-    data: IData[]
-    additional_data: AdditionalData
-    related_objects: IRelatedObjects
+    data: IDealData[]
+    additional_data?: IAdditionalData
+    related_objects?: IRelatedObjects
 }
+
+export interface IOwnerId {
+    id: number
+    name: string
+    email: string
+    has_pic: boolean
+    pic_hash: string
+    active_flag: boolean
+    value: number
+}
+
+export interface Prices {
+    [key: string]: {
+        id: number
+        product_id: number
+        price: number
+        currency: string
+        cost: number
+        overhead_cost: number
+    }
+}
+
+export interface IProduct {
+    id: number
+    name: string
+    code: string
+    description?: any
+    unit?: any
+    tax: number
+    category?: any
+    active_flag: boolean
+    selectable: boolean
+    first_char: string
+    item_price: number
+    visible_to: string
+    owner_id: IOwnerId
+    files_count?: any
+    followers_count: number
+    add_time: string
+    update_time: string
+    prices: Prices
+}
+
+export interface IProductData {
+    id: number
+    deal_id: number
+    order_nr: number
+    product_id: number
+    product_variation_id?: any
+    item_price: number
+    discount_percentage: number
+    duration: number
+    duration_unit?: any
+    sum_no_discount: number
+    sum: number
+    currency: string
+    enabled_flag: boolean
+    add_time: string
+    last_edit?: any
+    comments: string
+    active_flag: boolean
+    tax: number
+    name: string
+    sum_formatted: string
+    quantity_formatted: string
+    quantity: number
+    product: IProduct
+}
+
+export interface IPagination {
+    start: number
+    limit: number
+    more_items_in_collection: boolean
+}
+
+export interface IAdditionalData {
+    products_quantity_total: number
+    products_sum_total: number
+    variations_enabled: boolean
+    products_quantity_total_formatted: string
+    products_sum_total_formatted: string
+    pagination: Pagination
+}
+
+export interface IUser {
+    [key: string]: {
+        id: number
+        name: string
+        email: string
+        has_pic: boolean
+        pic_hash: string
+        active_flag: boolean
+    }
+}
+
+export interface IProducts {
+    success: boolean
+    data: IProductData[]
+    additional_data?: IAdditionalData
+    related_objects?: IRelatedObjects
+}
+
+export interface IDealAndProducts {
+    deals: IDealData[],
+    products: IProductData[]
+}
+
+
+
 
 
