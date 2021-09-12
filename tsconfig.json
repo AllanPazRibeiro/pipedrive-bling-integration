@@ -31,6 +31,7 @@
       "@infrastructure/*": ["infrastructure/*"],
       "@middlewares/*": ["middlewares/*"],
       "@presentation/*": ["presentation/*"],
+      "@shared/*": ["shared/*"],
     }
   },
   "ts-node": {

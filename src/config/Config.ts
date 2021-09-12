@@ -15,7 +15,13 @@ interface Configuration {
     serviceName: string
     environment: string
     instance?: string
-  }  
+  },
+
+  pipedrive: {
+    url: string,
+    company: string,
+    token: string
+  }
 }
 
 @injectable()
@@ -45,7 +51,13 @@ export class Config {
         serviceName: process.env.SERVICE_NAME || 'no-name',
         environment: process.env.NODE_ENV || 'development',
         port: Number(process.env.PORT) || 8001,
+      },
+      pipedrive: {
+        url: process.env.PIPEDRIVE_URL || '',
+        company: process.env.PIPEDRIVE_COMPANY || '',
+        token: process.env.PIPEDRIVE_TOKEN || ''
       }
+
     }
   }
 }
