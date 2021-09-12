@@ -22,6 +22,11 @@ interface Configuration {
     company: string,
     token: string
   }
+
+  bling: {
+    url: string,
+    token: string
+  }
 }
 
 @injectable()
@@ -56,6 +61,11 @@ export class Config {
         url: process.env.PIPEDRIVE_URL || '',
         company: process.env.PIPEDRIVE_COMPANY || '',
         token: process.env.PIPEDRIVE_TOKEN || ''
+      },
+
+      bling: { 
+        url: process.env.BLING_URL || '',
+        token: process.env.BLING_TOKEN || ''
       }
 
     }
