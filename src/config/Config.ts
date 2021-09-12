@@ -2,6 +2,13 @@ import dotenv from 'dotenv'
 import { injectable } from 'tsyringe'
 
 interface Configuration {
+  mongoDB: {
+    enabled: boolean,
+    user: string,
+    password: string,
+    database: string,
+    maxConnectionRetries: number,
+  }
   
   serverConfig: {
     port: number
@@ -27,6 +34,13 @@ export class Config {
     dotenv.config()
 
     return {
+      mongoDB: {
+        enabled: Boolean(process.env.MONGO_ENABLED) || true,
+        user: process.env.MONGO_USER || '',
+        password: encodeURIComponent(process.env.MONGO_PASSWORD as string) || '',
+        database: process.env.MONGO_DB || '',
+        maxConnectionRetries: Number(process.env.MAX_CONNECTION_RETRIES) || 3
+      },
       serverConfig: {
         serviceName: process.env.SERVICE_NAME || 'no-name',
         environment: process.env.NODE_ENV || 'development',
