@@ -1,9 +1,7 @@
 import { autoInjectable } from 'tsyringe'
 import { HTTPClient } from '../../shared/HTTPClient'
 import { Config } from '@config/Config'
-import { IProduct, IProductResponse } from './interfaces/IBling'
-import converter from 'xml-js';
-
+import { IOrder, IProductResponse } from './interfaces/IBling'
 
 @autoInjectable()
 export class Bling {
@@ -15,11 +13,12 @@ export class Bling {
     this.client = new HTTPClient(url)
   }
 
-  public async postProduct(product: IProduct): Promise<IProductResponse> {
+  public async postOrder(order: IOrder): Promise<IProductResponse> {
+    const js2xmlparser = require("js2xmlparser")
+    const xml = js2xmlparser.parse('pedido', order)
 
     return this.client.post(
-      `/v2/produto/json/&apikey=${this.token}`,
-      converter.js2xml(product)
+      `/v2/pedido/json?apikey=${this.token}&xml=${xml}`,
     )
   }
 }

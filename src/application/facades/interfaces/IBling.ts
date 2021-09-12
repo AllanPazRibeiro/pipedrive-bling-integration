@@ -164,3 +164,60 @@ export interface IProductResponse {
     retorno: IProductRetorno
 }
 
+export interface Deposito {
+    id: string;
+    estoque: string;
+}
+
+export interface Imagens {
+    url: string;
+}
+
+export interface CamposCustomizados {
+    memoriaRam: string;
+    eDualSim: string;
+}
+
+export interface IOrder {
+    codigo: string;
+    descricao: string;
+    situacao: string;
+    descricaoCurta: string;
+    descricaoComplementar: string;
+    un: string;
+    vlr_unit: string;
+    preco_custo: string;
+    peso_bruto: string;
+    peso_liq: string;
+    class_fiscal: string;
+    marca: string;
+    origem: string;
+    estoque: string;
+    deposito: Deposito;
+    gtin: string;
+    gtinEmbalagem: string;
+    largura: string;
+    altura: string;
+    profundidade: string;
+    estoqueMinimo: string;
+    estoqueMaximo: string;
+    cest: string;
+    idGrupoProduto: string;
+    condicao: string;
+    freteGratis: string;
+    linkExterno: string;
+    observacoes: string;
+    producao: string;
+    dataValidade: string;
+    descricaoFornecedor: string;
+    idFabricante: string;
+    codigoFabricante: string;
+    unidadeMedida: string;
+    garantia: string;
+    itensPorCaixa: string;
+    volumes: string;
+    urlVideo: string;
+    imagens: Imagens;
+    camposCustomizados: CamposCustomizados;
+    idCategoria: string;
+}
