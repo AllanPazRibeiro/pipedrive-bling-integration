@@ -11,12 +11,14 @@ import { httpMock, post } from './mocks/HTTPClient.mock'
 httpMock()
 import { Config } from '@config/Config'
 import { Bling } from './Bling'
-import { productMock } from './mocks/Bling.mock'
-import { IProduct } from './interfaces/IBling'
+import { orderMock } from './mocks/Bling.mock'
+import { IOrder } from './interfaces/IBling'
 
 describe('Bling', () => {
   test('should call http post properly when post product', async () => {
-    await new Bling((config as unknown) as Config).postProduct(productMock as unknown as IProduct)
-    expect(post).toHaveBeenCalledWith('/v2/produto/json/&apikey=123', productMock)
+    await new Bling((config as unknown) as Config).postOrder(orderMock as unknown as IOrder)
+    const js2xmlparser = require("js2xmlparser")
+    const xml = js2xmlparser.parse('pedido', orderMock)
+    expect(post).toHaveBeenCalledWith(`/v2/pedido/json?apikey=123&xml=${xml}`)
   })
 })

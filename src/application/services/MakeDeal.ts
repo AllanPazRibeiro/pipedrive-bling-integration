@@ -45,12 +45,12 @@ export class MakeDeal {
     this.collection = mongo.getCollectionName('Deals')
   }
 
-  private async getProductsBy(dealId: number) {
+  public async getProductsBy(dealId: number) {
     const { data } = await this.pipedrive.getDealsProductsBy(dealId)
     return data
   }
 
-  private async getAllWonDeals(): Promise<IDealAndProducts> {
+  public async getAllWonDeals(): Promise<IDealAndProducts> {
     const { data } = await this.pipedrive.getDeals()
     const products = await Promise.all(data.map(async deal => {
       return this.getProductsBy(deal.id)
@@ -66,7 +66,7 @@ export class MakeDeal {
     }
   }
 
-  private parseDeals(dealToParse: IDealAndProducts) {
+  public parseDeals(dealToParse: IDealAndProducts) {
     return dealToParse.deals.flatMap(deal => ({
       pedido: {
         cliente: {
@@ -90,26 +90,24 @@ export class MakeDeal {
     }))
   }
 
-  private async saveDeal(dealsToSave: IDataToSave[]) {
+  public async saveDeal(dealsToSave: IDataToSave[]) {
     const db = await this.mongo!.getInstance()
     const dealCollection =  db.collection(this.collection)
     dealCollection.insertOne(dealsToSave[0])
   }
 
   public async makeDeal() {
-  const deals = await this.getAllWonDeals()
-      const parsedDeals = this.parseDeals(deals)
-      
-      return parsedDeals.forEach(async (parsedDeal) => 
-        await Promise.all([
-          this.bling.postOrder({ 
-            client: parsedDeal.pedido.cliente,
-            itens: parsedDeal.pedido.itens 
-          } as unknown as IOrder),
-          this.saveDeal(parsedDeals as unknown as IDataToSave[])
-        ]).catch(err => {throw err})
-    )
+    const deals = await this.getAllWonDeals()
+    const parsedDeals = this.parseDeals(deals)
     
+    return parsedDeals.forEach(async (parsedDeal) => 
+      await Promise.all([
+        this.bling.postOrder({ 
+          client: parsedDeal.pedido.cliente,
+          itens: parsedDeal.pedido.itens 
+        } as unknown as IOrder),
+        this.saveDeal(parsedDeals as unknown as IDataToSave[])
+      ]).catch(err => {throw err})
+    )
   }
-
 }

@@ -16,6 +16,6 @@ import { Pipedrive } from './Pipedrive'
 describe('Pipedrive', () => {
   test('should call http get properly', async () => {
     await new Pipedrive((config as unknown) as Config).getDeals()
-    expect(get).toHaveBeenCalledWith('deals?api_token=123')
+    expect(get).toHaveBeenCalledWith('deals?api_token=123&status=won')
   })
 })
