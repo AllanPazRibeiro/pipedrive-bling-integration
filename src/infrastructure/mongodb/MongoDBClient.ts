@@ -20,8 +20,11 @@ export class MongoDBClient extends EventEmitter implements IDatabase {
   ) {
     super()
 
-    this.uri = `mongodb+srv://${config.get().mongoDB.user}:${config.get().mongoDB.password}@cluster0.vblyc.mongodb.net/${config.get().mongoDB.database}`
-    this.database = config.get().mongoDB.database,
+    this.uri = `mongodb://${config.get().mongoDB.host}:${
+      config.get().mongoDB.port
+    }/${config.get().mongoDB.database}`
+
+    this.database = config.get().mongoDB.database
     this.maxConnectionRetries = config.get().mongoDB.maxConnectionRetries
   }
 

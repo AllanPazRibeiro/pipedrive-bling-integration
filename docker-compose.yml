@@ -1,0 +1,33 @@
+version: '3'
+
+networks:
+  pipedrive-bling-integration:
+    driver: bridge
+
+services:
+
+  server:
+    container_name: PIPEDRIVE-BLING-INTEGRATION
+    build: '.'
+    volumes:
+      - ./:/pipedrive-bling-integration
+      - ./node_modules:/pipedrive-bling-integration/node_modules
+    environment:
+      NODE_ENV: development
+      MONGO_HOST: db
+    depends_on:
+      - db
+    ports:
+      - '8001:8001'
+    networks:
+      - pipedrive-bling-integration
+
+  db:
+    image: 'mongo'
+    container_name: MONGODB_PIPEDRIVE_BLING_INTEGRATION
+    ports:
+      - '27017:27017'
+    volumes:
+      - ./data/db:/data/db
+    networks:
+      - pipedrive-bling-integration
